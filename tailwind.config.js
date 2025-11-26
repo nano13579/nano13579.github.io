@@ -1,10 +1,12 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   mode: 'jit',
   purge: ['./public/**/*.html', './src/**/*.{astro,js,jsx,ts,tsx,vue}'],
   theme: {
     extend: {
         fontFamily: {
-            space: ['space-mono', 'sans-serif'],
+            mono: ['"Space Mono"',  ...defaultTheme.fontFamily.mono],
         },
     },
   },

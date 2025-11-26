@@ -1,12 +1,23 @@
 ---
 import '@/styles/global.css'
+import { Separator } from '@/components/ui/separator'
 ---
 
 <!doctype html>
 <html lang="en">
-	<body>
-		<div class="bg-[#0d1b2a] min-h-screen flex text-white font-space">
+	<body class="bg-[#0d1b2a] min-h-screen text-white font-mono">
+		<div class="flex md:mt-20 text-5xl text-center justify-center mb-10">
 			<p>hi! i'm nandini.</p>
+		</div>
+		<Separator className='my-4 bg-white max-w-1/2 mx-auto'/>
+		<div class="flex items-center w-screen space-x-4 justify-center">
+			<a href = "/Home#">Home</a>
+			<Separator orientation='vertical'/>
+			<a href = "/Projects#">Projects</a>
+			<Separator orientation="vertical"/>
+			<a href = "/Blog#">Blog</a>
+			<Separator orientation="vertical"/>
+			<a href = "/Contact#">Contact</a>
 		</div>
 	</body>
 </html>

@@ -6,8 +6,12 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'space-mono';
+  font-family: 'Space Mono';
   src: url('/fonts/SpaceMono-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
+
+/* .font-space-mono {
+  font-family: var(--font-mono);
+} */
