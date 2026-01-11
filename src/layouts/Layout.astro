@@ -1,23 +1,31 @@
 ---
 import '@/styles/global.css'
 import { Separator } from '@/components/ui/separator'
+const currentPath = Astro.url.pathname
 ---
 
 <!doctype html>
 <html lang="en">
-	<body class="bg-[#0d1b2a] max-h-screen text-white font-mono">
+	<body class="bg-darkestblue max-h-screen text-light font-mono">
 		<div class="flex md:mt-20 mt-5 text-5xl text-center justify-center mb-10">
-			<p>hi! i'm nandini.</p>
+			<p>nandini ghata</p>
 		</div>
-		<Separator className="my-4 max-w-[50%] mx-auto bg-white shrink-0" />
-		<div class="flex items-center w-screen space-x-4 justify-center">
-			<a href = "/Home#">Home</a>
+		<div class="flex items-center text-xl w-screen space-x-4 font-bold justify-center">
+			<a href = https://github.com/nano13579 class = "underline decoration-middlestblue decoration-2">Github</a>
 			<Separator orientation='vertical'/>
-			<a href = "/Projects#">Projects</a>
+			<a href = https://www.linkedin.com/in/nandini-ghata-951234397/7 class = "underline decoration-middlestblue decoration-2">LinkedIn</a>
 			<Separator orientation="vertical"/>
-			<a href = "/Blog#">Blog</a>
+			<a href = "mailto:ghatanandini@gmail.com" class="underline decoration-middlestblue decoration-2">Email</a>
+		</div>
+		<Separator className="my-4 max-w-[50%] mx-auto bg-light shrink-0" />
+		<div class="flex items-center w-screen space-x-4 justify-center mb-5 text-xl">
+			<a href = "/Home#" class={currentPath === '/Home' ? "font-bold text-lightblue" : "hover:underline"}>Home</a>
+			<Separator orientation='vertical'/>
+			<a href = "/Projects#" class={currentPath === '/Projects' ? "font-bold text-lightblue" : "hover:underline"}>Projects</a>
 			<Separator orientation="vertical"/>
-			<a href = "/Contact#">Contact</a>
+			<a href = "/Blog#" class={currentPath === '/Blog' ? "font-bold text-lightblue" : "hover:underline"}>Blog</a>
+			<Separator orientation="vertical"/>
+			<a href = "/Contact#" class={currentPath === '/Contact' ? "font-bold text-lightblue" : "hover:underline"}>Contact</a>
 		</div>
 	</body>
 </html>

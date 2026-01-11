@@ -1,29 +1,28 @@
 ---
-import { AspectRatio } from "@/components/ui/aspect-ratio"
-import Layout from '../layouts/Layout.astro'
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-</Layout>
-<!-- <div class="p-8"></div>
-<div class="justify-center flex items-center">
-<AspectRatio client:load className="mx-auto bg-[#1b263b] justify-center items-center text-white rounded-lg max-w-[50%] max-h-[7%]">
-	<p class="justify-center text-left space-x-4 pl-4 pt-4">
-		hello, welcome to my corner of the internet!
-	</p>
-	<p class="justify-center text-left space-x-4 pl-4">
-		I'm a 16 year old passionate about robotics and related engineering
-	</p>
+<Layout />
+
+<AspectRatio client:load className="mx-auto bg-darkblue justify-center items-center text-light rounded-lg max-w-[60%] max-h-[20%]">
+	<div class="flex flex-col h-full items-center justify-center">
+	<div class="flex justify-center">
+		<div class="text-center">
+			<p>Hello, welcome to my corner of the internet!</p>
+		</div>
+	</div>
+	<div class="flex justify-center mr-[10%] ml-[10%]">
+		<div class="text-center">
+			I'm a 16 year old who loves building and breaking things. Among
+			other things, find me making PCBs and working on hardware related
+			software. I also enjoy listening to and making my own music.
+		</div>
+	</div>
+	<div class="flex justify-center">
+		<p class="justify-center text-center">
+			Check out some of my <a href="/Projects#" class="underline decoration-middlestblue decoration-2 font-bold">projects</a>!
+		</p>
+	</div>
+	</div>
 </AspectRatio>
-</div> -->
-<div class="p-8"></div>
-<div class="flex justify-center">
-  <div class="text-left">
-    <p>hello, welcome to my corner of the internet!</p>
-  </div>
-</div>
-<div class="flex items-center justify-center">
-<p class="justify-center text-left">
-	I'm a 16 year old passionate about robotics and related engineering
-</p>
-</div>

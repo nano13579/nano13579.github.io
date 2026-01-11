@@ -12,6 +12,14 @@
   font-style: normal;
 }
 
-/* .font-space-mono {
-  font-family: var(--font-mono);
-} */
+@theme {
+  --color-light: #f0ebd8;
+  --color-lightblue: #748cab;
+  --color-middlestblue: #3e5c76;
+  --color-darkblue: #1d2d44;
+  --color-darkestblue: #0d1321;
+}
+
+::selection {
+  @apply bg-light text-darkestblue;
+}
