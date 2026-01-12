@@ -2,6 +2,19 @@
 import Layout from "@/layouts/Layout.astro"
 import { Image } from "astro:assets"
 import crater0 from "../assets/crater0.png"
+import keeb0 from "../assets/keyboard.png"
+import devboard0 from "../assets/3d-render.png"
+import car0 from "../assets/car.png"
+import macropad0 from "../assets/narwhal0.png"
+import robotarm0 from "../assets/robotarm.jpg"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 ---
 
 <Layout>
@@ -9,12 +22,123 @@ import crater0 from "../assets/crater0.png"
 <!doctype html>
 <html lang="en">
     <body>
-        <div class="p-4"></div>
-        <!-- <div class="flex"> -->
-         
-        <Image src={ crater0 } alt="schematic crater" class="rounded-lg ml-8" width={400}/>
-        <p class="pl-4 ml-8 font-mono text-2xl">A Guitar Pedal: Crater</p>
-        <!-- </div> -->
-        <div class="p-4"></div>
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 p-8">
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>A Multi-Effects Unit Guitar Pedal</CardTitle>
+                    <CardDescription>In Progress</CardDescription>
+                </CardHeader>
+                <CardContent>
+                     <Image src={ crater0 } alt="schematic crater" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>Employs the STM32H743, other peripherals 
+                    (i.e. Codec, LDO, Micro SD Reader), and passive components for effects</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>FPGA Design for VGA Graphical Output</CardTitle>
+                    <CardDescription>In Progress</CardDescription>
+                </CardHeader>
+                <CardFooter>
+                    <p>FPGA design for VGA output, simulated using Verilator 
+                        and SDL to represent the iCE40UP5K FPGA during testing</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>Custom Split Keyboard</CardTitle>
+                    <CardDescription>Completed - October 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                     <Image src={ keeb0 } alt="split keeb" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>Hot swappable split keyboard from scratch with wireless communication and ZMK firmware</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>A Drawing Robot</CardTitle>
+                    <CardDescription>Completed - December 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Image src={ robotarm0 } alt="robot arm" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>Used LeRobot and Hugging Face along with the SO-101 robot arm for training 
+                        and inference using AMD's cloud with an aim to create a robot 
+                        that mimics human drawings</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>Radii Script</CardTitle>
+                    <CardDescription>In Progress</CardDescription>
+                </CardHeader>
+                <CardFooter>
+                    <p>Using Robert Nydstrom's, "Crafting Interpreters"
+                as a guideline to implement a fully functional scripting language. Trying to make 
+            this entirely in Neovim!</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>RP2040 Dev Board</CardTitle>
+                    <CardDescription>Completed - December 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                     <Image src={ devboard0 } alt="dev board" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>An RP2040 devboard from scratch w/ an Infineon CYW43xxx chip for wireless (WIP) communication</p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>Macropad</CardTitle>
+                    <CardDescription>Completed - May 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Image src={ macropad0 } alt="macropad image" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>A little mini keyboard, and my first
+                        hardware project and exposure to ECAD!
+                    </p>
+                </CardFooter>
+            </Card>
+            </div>
+            <div class="break-inside-avoid mb-6">
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                <CardHeader>
+                    <CardTitle>Boxcar</CardTitle>
+                    <CardDescription>Completed - July 2025</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Image src={ car0 } alt="car image" class="rounded-lg"/>
+                </CardContent>
+                <CardFooter>
+                    <p>Wireless RC Car controlled via hand movements recorded 
+                        w/ accelerometer, data is sent using I2C communication 
+                        to RP2040 microcontroller</p>
+                </CardFooter>
+            </Card>
+            </div>
+        </div>
     </body>
 </html>
