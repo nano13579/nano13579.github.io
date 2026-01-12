@@ -1,0 +1,87 @@
+---
+import Layout from "@/layouts/Layout.astro"
+---
+
+<Layout/>
+
+<!doctype html>
+<html lang="en">
+    <body>
+        <p class="font-bold text-center text-3xl mt-16">FPGA Design for Graphical Output</p>
+        <p class="font-bold text-center text-xl mt-4">by Nandini G.</p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 1</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Installed Verilator and Simple DirectMedia Layer to simulate VGA output when using 
+            Verilog in VSCode. Also installed internal extensions within VSCode for Verilog 
+            features.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-4 text-left font-bold">
+            Notes
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - Verilator converts Verilog to C++
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - SDL displays the graphics to simulate VGA graphical output
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - C++ builds simulation exec.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - WSL since Verilator and SDL are easier to install in Linux env.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-4 text-left">
+        Had to create an SSH key to clone the repo into the proper directory since all installations were done inside of WSL.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 2</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        I decided to create a simple 64 bit adder and have corresponding graphical output (TBD). 
+        Instead of using Ripple Carry Adders which run sequentially (i.e. first adder calculates 
+        carry-out, second adder receives it then does calculations that include the previous 
+        carry-out then carry-out's itself etc. etc.) Will likely use Carry Look-Ahead Adders 
+        which are slightly more complex and offer faster calculation times. The individual adders 
+        are just duplicates of each other so this process should be fairly easy.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 3</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Starting with the VGA aspects of things,
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - HSYNC goes through pixel data line by line horizontally. An HSYNC pulse is sent once 
+        a line is completed and the process is repeated for consecutive lines
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - Once HSYNC maxes, a VSYNC pulse is created, starting the next frame from the 
+        top left corner (default)
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - Horizontal/Vertical Retrace is the time that it takes for pulse to be sent/created 
+        and the next line/frame to start
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - Retrace periods = Back Porch (time before) + Front Porch (time after)
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        - Aiming for a 640 x 480 display area (calculations for horizontal and vertical maxes will be done accordingly)
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-4 text-left">
+        TODO: find the clock speed (MHz) according to dimensions and frame speed and specs for ice40up5k
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 4</p>
+        <p class="ml-[20%] mr-[20%] mt-4 text-left">
+        Will use a 25.175 MHz clock. The standard number of horizontal pixels is 800, therefore 
+        max is 799. Total active pixels is 640 horizontally. Generally the front porch for 
+        640 x 480 is 16 pixels and retrace is generally 96 pixels. So 800 - 640 - 16 - 96 = 48 
+        which is the width of the horizontal back porch in pixels. Same calculations go for 
+        vertical widths only with a standard horizontal pixel width of 524 pixels and 10 pixels 
+        for front porch and 2 pixels for retrace. 
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 5</p>
+        <p class="ml-[20%] mr-[20%] mt-4 text-left">
+        My plan is to create three separate modules for internal clock, horizontal, and vertical 
+        counters and instantiate them within the controller module, connecting the ports by name.
+        </p>
+        <div class="p-8">
+    </body>
+</html>
+

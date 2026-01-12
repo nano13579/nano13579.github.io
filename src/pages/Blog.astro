@@ -1,12 +1,93 @@
 ---
 import Layout from "@/layouts/Layout.astro"
+import { Image } from "astro:assets"
+import crater0 from "../assets/crater0.png"
+import keeb0 from "../assets/keyboard.png"
+import hdlbits0 from "../assets/hdlbits.png"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 ---
 
 <Layout>
-<!doctype html>
-<html lang="en">
-    <body>
-        <div class="font-mono">Blog</div>
-    </body>
-</html>
 </Layout>
+    <body>
+        <div class="p-2"/>
+            <div class="columns-1 sm:columns-2 lg:columns-2 gap-6 pl-8">
+                <a href="/Pedal#">
+                    <div class="">
+                        <Card className="border hover:bg-middlestblue">
+                            <CardContent>
+                                <Image src={ crater0 } alt="schematic crater" class="rounded-lg"/>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    <div class="m-4">
+                        <p class="font-bold hover:underline">Guitar Pedal: A Journal (WIP)</p>
+                        <p class="mt-2">The thought process and research behind Crater, my custom multi-effects unit. 
+                            While researching, I delved into creating a DSP based MCU in 
+                            order to control overdrive, distortion, and fuzz
+                            in a chain like method. A combination of transistors, capicators, and resistors were used for 
+                            individual effects and I added diodes for a little bit of additional clipping. 
+                        </p>
+                        <div class="p-2"/>
+                        <p>Github: <a href=https://github.com/nano13579/crater class="underline">https://github.com/nano13579/crater</a>
+                        - not yet open source</p>
+                        <p>
+                            Notes taken using Obsidian. 
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="columns-1 sm:columns-2 lg:columns-2 gap-6 pl-8">
+                <a href="/Design#">
+                    <div class="">
+                        <Card className="border mt-4 hover:bg-middlestblue">
+                            <CardContent>
+                                <Image src={ hdlbits0 } alt="schematic crater" class="rounded-lg"/>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    <div class="m-4 pt-4">
+                        <p class="font-bold hover:underline">FPGA Design: A Journal (WIP)</p>
+                        <p class="mt-2">FPGA design using Verilog HDL for VGA output simulated w/ Verilator and SDL to mimic the iCE40UP5K. 
+                            Check out my experience with my first HDL and simulator! Currently catching up on some basics using HDLBits.
+                        </p>
+                        <div class="p-2"/>
+                        <p>Github: <a href=https://github.com/nano13579/vga-output class="underline">https://github.com/nano13579/vga-output</a>
+                        - not yet open source</p>
+                    </div>
+                </a>
+            </div>
+            <div class="columns-1 sm:columns-2 lg:columns-2 gap-6 pl-8">
+                <a href="/Keyboard#">
+                    <div class="">
+                        <Card className="border mt-4 hover:bg-middlestblue">
+                            <CardContent>
+                                <Image src={ keeb0 } alt="schematic crater" class="rounded-lg"/>
+                            </CardContent>
+                        </Card>
+                    </div>
+                    <div class="m-4 pt-4">
+                        <p class="font-bold hover:underline">Banana Split: A Journal</p>
+                        <p class="mt-2">With a design similar to that of the UM-70, this split keeb 
+                            is hotswappable, wireless, and ZMK supported. Both halves fit together 
+                            like puzzle pieces and are powered by 3.7v rechargeable lithium ion 
+                            batteries. The current case is made of a simple sandwich mount with 
+                            openings for USB-C connection. I made this primarily because I wanted 
+                            to make something unique and different from common split custom keyboard 
+                            designs - I also learned a ton about matrixes and the functionality 
+                            behind wireless split keebs in the process.
+                        </p>
+                        <div class="p-2"/>
+                        <p>Github: <a href=https://github.com/nano13579/banana-split class="underline">https://github.com/nano13579/banana-split</a>
+                        </p>
+                    </div>
+                </a>
+            </div>
+    </body>

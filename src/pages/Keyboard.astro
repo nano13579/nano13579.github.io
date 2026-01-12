@@ -1,0 +1,131 @@
+---
+import Layout from "@/layouts/Layout.astro"
+---
+
+<Layout/>
+
+<!doctype html>
+<html lang="en">
+    <body>
+        <p class="font-bold text-center text-3xl mt-16">Banana Split</p>
+        <p class="font-bold text-center text-xl mt-4">by Nandini G.</p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 1</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Set up a preliminary layout. I think I'll probably do something 
+            similar to the mistel barocco; so it'll be 60% ish, tentable, and 
+            have a puzzle piece feel. Originally thought of using two separate 
+            pico's but that would require two separate bluetooth modules for 
+            communication, increasing overall cost. I will most likely use 
+            nice!nano's instead. Also worked a bit on the matrix today using KLE.
+            For space conservation I'm thinking of creating an outward protrusion down 
+            and out in a slope to house mcus. Will likely cover this section with wood 
+            for wrist support.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 2</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Today I created a tentative starter list of materials: Nice!nano x 2 Cherry mx 
+            brown switches x 83 PBT OEM keycaps for mx style switches x 83 EC11 Rotary 
+            Encoder x 1 (might later look into a keycap set that includes the cap for 
+            the encoder) Encoder Cap x 1
+            Cool thought for later: a magnet in the hollow of the case for ease of use when the 
+            two halves of the keeb are connected. Also! Schematic almost finished! I was a little 
+            worried about the difference between using the high frequency vs low frequency pins 
+            but there shouldn't be too much of a difference in terms of firmware and performance.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 3</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            So due to some incorrect file paths I had to abandon hierarchical sheets :(( I ended 
+            up just splitting the two halves of the keeb into two separate kicad folders. It also 
+            took a little bit of time but I finalized all footprints. (links here) I also debated 
+            using a power switch, hoping to rely on ZMK for low power functions because I didn't 
+            want to get rid of any more keys. But I ended up using one anyway because it seemed 
+            like a more direct method for power control.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 4</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            I got started on pcb finally. I finished the left side first, aligning everything from 
+            the dxf file given from kle. I've heard a lot of ppl mention the use of ground pours, 
+            especially for keeb pcbs. However, since they are heat sinks, it'll probably mess with 
+            me when I go to solder my tht components, so I opted to just fully route the whole 
+            thing. I ended up actually sacrificing keys for a minimalist design. So sad. I may 
+            add acrylic to make the section with mcu visible, so there isn't any meaningless gap.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 5</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Right half of keeb pcb finished! Worked on edge cuts so the two halves fit. 
+            Started on the cad imported stuff from grabcad and then cried because lol 
+            the kailh hot swap sockets were supposed to go on the other side. So there's two 
+            things I can do atp: flip the mcu, switches, and battery connector to the back copper 
+            layer or flip every single switch and diode to the back copper layer. Even though 
+            mostly everything is through holes (aka just the diodes), I am resorting to the latter.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 6</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            So I finished flipping the switches and rerouting for the left side. However, 
+            I realized when I went to start the cad - again - that the offset for the 
+            edge of the pcb is off. If I try to fit the two halves of the keeb together, 
+            there would have been no additional room for the case wall thickness which 
+            should be around 1.5 - 3 mm in width.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 7</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Reviving this since its been too long. Used kle to create an entirely different layout 
+            with more empty space needed to fit the mcu. The offset between the edge of the pcb 
+            and the end of the keycap is roughly 1.51 mm which should be enough thickness - at 
+            least on the 'puzzle piece' side - for the keeb case thickness. Did about roughly 
+            half the traces on the left side.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 8</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Finished the pcb for both the left and right sides. Initially I had the mcu for the 
+            right side on the back copper layer which I later had to fix by flipping it and 
+            rerouting traces. When I went to trace the routes on the other side, the hotswap 
+            sockets were too close to the edge cuts so I flipped the switches on the borders 
+            upside down. Considering that I plan to use PBT OEM keycaps, this change shouldn't 
+            play into sound or overall functionality of the keeb.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 9</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Got started on basic cad. Extruded the top plate for the left side. Since I'm in a 
+            time crunch I think I'll just do a simple sandwich mount. I initially made the side 
+            thickness around 3mm, but this was odd-looking as well as flimsy. So the side thickness 
+            (except for the center split line) is around 22 mm. Similar to the mistel barocco, I 
+            think I plan on having the top frame lean at an angle on the sides.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 10</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Just realized I did my sandwich mount wrong -_- Instead of having three separate pieces 
+            for the top frame, bottom frame, and plate, I basically merged the plate into the 
+            thickness of the keeb and had a flat non-extruded base - which proves for a not 
+            structurally sound case all in all. I finished that today, all I have to finish is 
+            drafting the edges for a smoother look, adding holes for screws, and making a blender 
+            render.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 11</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            A large issue that I had throughout this entire process, and more so today, was getting 
+            edge cuts and case thickness right. Earlier I had cut into the pcb on the sides by 1.510 
+            mm so that the case could wrap around the entire pcb, specifically the 'puzzle piece' 
+            section. So today when I went to put together the two 'halves' of the keeb, there were 
+            a lot of inconsistencies. The m2 screw holes did not line up and the left hand keeb had 
+            thicker borders - these issues mainly came up because I had forgot to / had an additional 
+            offset of 1.510 mm somewhere in a sketch - so today I was cleaning up the misalignments 
+            and such.
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 12</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            LAST BIT OF CLEAN UP THE CAD IS DONE! tidied up and fixed up the appearance - still 
+            not sure about the aesthetic but whatever. Later this week I'll work on the blender 
+            render!
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl">Day 13</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            Finishing touches - added ZMK firmware which included a custom keycap in which a 
+            Lily58 keymap was used as a previous template. The current firmware holds both 
+            keyboards to be connected and to share a single mcu - however both halves are 
+            connected wirelessly, so the keymap would be split between two sets of config 
+            files and would be connected wirelessly when handled 'in-person' one microcontroller 
+            set to controller the other two a worker
+        </p>
+    </body>
+</html>
