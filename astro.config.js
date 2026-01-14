@@ -8,6 +8,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
+  site: `https://nano13579.github.io/`,
+  base: '/',
+  output: 'static',
   integrations: [react()],
   redirects: {
     '/': '/home',
