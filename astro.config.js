@@ -12,8 +12,8 @@ export default defineConfig({
   output: 'static',
   integrations: [react()],
   redirects: {
-    '/': '/home',
-    '/#': '/home',
+    '/': '/Home',
+    '/#': '/Home',
   }
 });
 
