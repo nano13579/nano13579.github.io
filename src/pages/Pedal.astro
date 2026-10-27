@@ -1,5 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro"
+import { Image } from "astro:assets"
+import excalidraw from "../assets/excalidraw_pedal.png"
+import pedal1 from "../assets/ltspice_pedal1.png"
+import pedal2 from "../assets/ltspice_pedal2.png"
+import pedal3 from "../assets/ltspice_pedal3.png"
 ---
 
 <Layout/>
@@ -13,7 +18,8 @@ import Layout from "@/layouts/Layout.astro"
             Crater is reference to the Comet Distortion 
             modification of the BOSS DS-1 distortion pedal
         </p>
-        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+        <p class="ml-[20%] mr-[20%] mt-10 text-left text-xl"></p>
+        <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-8 mb-4">Day 1</p>
         <p class="ml-[20%] mr-[20%] mt-2 text-left">
         There are a lot of designs for single effect units (i.e. only overdrive etc.) so I 
         will likely make a digital multi effects unit that has controls for fuzz, distortion, 
@@ -61,6 +67,7 @@ import Layout from "@/layouts/Layout.astro"
         - The Daisy Seed was last updated early in 2022, so some components may be outdated and/or have better alternatives - look for these too.
         </p>
         <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+        <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 2</p>
         <p class="ml-[20%] mr-[20%] mt-2 text-left">
         I set up the basic schematic adding the peripherals I had mentioned earlier. 
         I'm also adding a Micro-B USB and debug and I/O and some buttons + LEDs. And a crystal. 
@@ -69,6 +76,217 @@ import Layout from "@/layouts/Layout.astro"
         that I'll be using for the effects that I plan to have. 
         </p>
         <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+        <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 3</p>
+        <div class="flex justify-center">
+        <Image src={ excalidraw } alt="wiring diagram" class="rounded-lg w-[60%]"/>
+        </div>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+        I made a general wiring diagram to better visual connections between components. 
+        Op-amps will be more detailed as I further explore possible options. Input and 
+        output jacks will both be 1/4 inch mono. This will, unfortunately, have to be a 
+        4 layer pcb. I have opted to use the STM32H750IBT6, over the K6 used in the most 
+        recent version of the Daisy Seed, since the K6 uses a Ball Grid Array - something 
+        which cannot easily be hand soldered and would require more expensive pcb manufacturing. 
+        The Daisy Seed uses 64MB Synchronous DRAM, so I plan on using the IS42S16400J-xT, with 54 
+        pins an a TSOP Type II package. I also found IS42S16400J-xC as a near identical 
+        symbol/footprint compared to that of the xT, so I chose on a whim. Looking at KiCad's 
+        default symbol library, I could not find 8MB QSPI Flash, however, I did find the 
+        IS25WP256D-xM, which has a capacity of 256MBit (more than what is needed/referenced 
+        in the Daisy but that is fine hardware wise). Since I have yet to plan the details 
+        for specific effects and controls, I have added all the necessary components to the 
+        schematic save user interactives, op-amps, and filtration peripherals, which will be 
+        added at a later yet. 
+        </p>
+        <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+        <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 4</p>
+        <p class="ml-[20%] mr-[20%] mt-2 text-left">
+            I learned that the xT in the IS42 SDRAM represented solderable pins over 
+            the difficult to handle BGA, so I ended up having chose the right package.
+            I set up the basic power pins for the STM, placing 100nF capacitors per VDD pin 
+            and a single 10uF bulk capacitor. Since the audio is handled using an external ADC 
+            and DAC in the form of the PCM codec, I can connect VDDA to both VSSA and VREF+. 
+            I <a href=https://electronics.stackexchange.com/questions/589927/purpose-of-vref-in-mcus-adcs style="text-decoration: underline;"> found</a> 
+            that VREF+ marks an absolute reference voltage (the difference in potential energy between 
+            a point and a defined, or absolute, value) which the STM32H7 can compare input analog signals 
+            to. In simpler chips VREF+ is preconnected to VDDA, however this STM provides the ability to 
+            use a lower reference voltage for higher precision. However, since I do not plan on using 
+            the onboard ADC (much? - will disconnect the pin later if need be), I will not need this 
+            extra precision, so the VCC will be used as a reference instead. I found general guidelines 
+            for power supply decoupling in the <a href=https://electronics.stackexchange.com/questions/589927/purpose-of-vref-in-mcus-adcs style="text-decoration: underline;"> STM32H750IB datasheet</a>
+            </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 5</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">Added a ferrite bead to bridge DC to 
+                the noisy AC rail. The bead provides resistance against the alternating current 
+                but allows DC current to flow through, powering the analog components. I chose
+                 120R impedance at 100MHz, only because I've seen examples of this value bead 
+                 having been used in other similar chips. I'm not sure if it will work for my 
+                 board, will likely have to find and check against a possible bead's ZRX 
+                 (impedance, resistance, reactance) graph. I also realized that I forgot 
+                 the external clock as a part of the DSP to my wiring diagram. Some general 
+                 notes that I took when wiring the 
+                 <a href=https://www.issi.com/WW/pdf/42-45S16400J.pdf style="text-decoration: underline;"> IS42 RAM</a>: This is a 16 bit 
+                 wide chip and requires data to be transferred in its full width, so the data 
+                 mask pins (LDQM and UDQM) are used to write data in the form of two 8 bit chunks. 
+                 FMC_NBL0 handles the lower byte and FMC_NBL1 handles the upper byte, the STM32 
+                 can choose to write to one or to the other or both, whichever is not in use is 
+                 driven high, telling the IS42 to ignore the byte. FMC itself stands for Flexible 
+                 Memory Controller and allows the STM32 to integrate external memory sources and 
+                 map these external IC's - processes will albeit be a little slower than on-board
+                  hardware. DQ0 to DQ16 on the IS42 are I/O. The 12 addressable pins A0 through 
+                  A11 specify data storage/retrieval location in terms of row and column addresses.
+                   Both I/O and and addressable pins are bidirectional to allow for both reading 
+                   and writing. Control lines are wired appropriately with pins that have 
+                   predetermined FMC functions (found in the Pin Description section of the 
+                   SMT32 datasheet). I'm not entirely sure that I wired the VDD and GND pins 
+                   right, will check this later.
+            </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 6</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">Finished setting up the external clock, 
+                I still have to choose a specific crystal that is rated for the 18pF caps, but 
+                will likely do this later. Also completed wiring the LP2985 1.8V LDO, which I
+                 actually misplaced in my initial wiring diagram. 9V is first stepped down to 
+                 3.3V using the TPS6. This 3.3V is then brought to 1.8V to power flash and codec 
+                 etc. I had initially wired the TPS62172DSG according the "Typical Application 
+                 Schematic" in the documentation for the chip, only to realize that the diagram 
+                 was for a different version of the TPS6. The chip in the documentation had a 
+                 fixed 1.8V output while I am using a 3.3V output, so the feedback pin should be 
+                 connected to ground (docs say analog, but I'm still not sure) or no connect. The 
+                 TPS62172DSG also has a lower output current compared to that of the chip shown in 
+                 the diagram, so the value of the inductor will have to change (value TBD).
+            </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 7</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">So the value of the inductor on the buck 
+                converter stays the same, it's just the Isat rating which changes apparently 
+                (to something greater than 750mA - check later), which I will need to take into 
+                consideration when choosing parts. An external 9V is being applied to the system 
+                to power the op amps in both the input and output stages, so I'll implement a 
+                mid-rail generator (virtual ground at 4.5V) using a resistor divider. For the 
+                input stage op amp I'll use something similar to the TL072, and the output stage 
+                will use the RC4580 or similar. I don't really care too much about small 
+                differences in how clean the sound is etc., but if my prototype doesn't work 
+                I want to have used cost efficient parts. I also finished connections between 
+                the IS25WP QSPI flash and the STM32H7, made using QUAD SPI Bank 1 pins for the 
+                singular external flash. I currently have the RESET pin in no connect, but I'll 
+                have to research this later for a possible pull to high. 
+            </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 8</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">I wired the PCM3060 as per the 
+                datasheet about a month ago. Since it has been a while, this is a reexamination 
+                of the digital signal processing that is occurring within the system: First, the 
+                signal is prepared at the analog level. A continuous analog electrical signal 
+                is received by the input jack from the guitar. This pickup itself has a really
+                 high impedance and the load has low impedance. To prevent a voltage drop across
+                  the source the signal will not be provided directly to the load. Instead, a
+                   unity buffer op amp is used to separate the low and high impedance regions,
+                    reproducing the source and drawing negligible current from the incoming 
+                    signal (gain = 1). The signal is then put through another op amp, or a 
+                    <a href='https://ocw.mit.edu/courses/6-01sc-introduction-to-electrical-engineering-and-computer-science-i-spring-2011/resources/lecture-1-object-oriented-programming-6/' style="text-decoration: underline;"> "voltage controlled voltage course" </a> 
+                    which will take in some voltage Vin and amplify it in a closed feedback loop. The codec 
+                    has a sampling rate of 48kHz, so the Nyquist limit is 24kHz (as in the highest frequency 
+                    of the incoming signal should be 24kHz in order for clean processing). The anti alias filter 
+                    is used to block frequencies higher than the Nyquist limit. Since the guitar signal swings 
+                    positive and negative, ground reference cannot be at 0V, so we're going to use VCOM to set 
+                    our reference ground to 1.65V. Then the signal is finally sent to the codec for conversion. 
+                    To get a high 24 bit resolution useful for further filtration, the codec conducts oversampling 
+                    in the form of delta-sigma modulation, where the signal is sampled 64 times the base sampling 
+                    rate, which is 48kHz in my case, resulting in a sampling rate of a little over 3 MHz . 
+                    The codec then conducts digital decimation, which includes its own anti alias filter. 
+                    Then the signal is down sampled back to 48kHz before being sent to a circular buffer in 
+                    the 64MB SDRAM. Sampled data is then converted into floats before flashed mathematical 
+                    algorithms are run on top of the data for effects. The DAC on the codec functions in 
+                    pretty much the same way as the ADC, only reversed. There is an on-chip LPF which is 
+                    used for initial filtration. In order to filter additional high frequency signals 
+                    that are missed, I have an additional LPF off board in the output stage. In addition, 
+                    the op amp runs on 9V of digital current, but we only want AC to exit the system so DC 
+                    is isolated before the signal leaves. 
+                    Helpful Reddit <a href='https://www.reddit.com/r/guitarpedals/comments/2gtboc/how_does_a_pedal_actually_work_lets_get_technical' style="text-decoration: underline;:">Link</a>
+            </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 9</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">So I found a  
+                <a href='https://www.ti.com/lit/ug/slau220/slau220.pdf' style="text-decoration: underline">PCM3060 User Guide</a> which 
+                has a pretty detailed wiring diagram for analog input and output. The PCM3060 
+                actually has differential inputs, where the voltage difference between two 
+                signals is measured and common noise is shared between the two is removed. 
+                The output is also differential, containing complementary (one positive and 
+                one inverted) voltages. The inverted signal is able to swing to negative values 
+                because I had used VCOM earlier to set reference ground to 1.65V. So essentially, 
+                takeaway is that I will need a pair of TL072s and a pair of RC4580s for 
+                differential input/output. I kept staring at the PCMEVM User Guide and 
+                realized there was no way I would be able to wire audio preprocessing correctly 
+                on the first try since there are way too many passive components. So I'm using 
+                LTSpice for simulation before anything else goes on the schematic. I'm using the 
+                LT1057 as a drop in replacement for the TL072 since it comes in their default 
+                library.</p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 10</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">When I was looking through the 
+                design considerations of the PCM3060 datasheet earlier, I had missed the 
+                section that had a full wiring diagram for an example analog input and 
+                output stage. My design will probably differ, but it's nice to have a reference 
+                to look at. Also I mislabeled Vcc as 3.3V on the codec, changed it to +5V. So 
+                VCOM would actually be at ~2.5V. Since I'm using the default differential output 
+                for the PCM, I need to add a negative rail, so that the output signal can swing 
+                both positive and negative. 
+            </p>
+                <div class="flex justify-center">
+                    <Image src={ pedal1 } alt="output" class="rounded-lg w-[60%]"/>
+                </div>
+                <p class="ml-[20%] mr-[20%] mt-2 text-left">
+                Above is the waveform for the output stage, where a 
+                differential signal from the PCM3060 is converted to a single signal which will 
+                ultimately be fed through the output jack. I shifted the phase of VOUTL- so that 
+                I could see the difference between the two signals. The output signal experiences 
+                a gain of 0.75, thus why it bottoms out at -1.5V while the difference between the 
+                differential signals is at -2. 
+                </p>
+                <div class="flex justify-center">
+                    <Image src={ pedal2 } alt="input" class="rounded-lg w-[60%]"/>
+                </div>
+                <p class="ml-[20%] mr-[20%] mt-2 text-left">
+                This is a part of the input stage. The pickup 
+                coils for guitars are, of course, very high impedance, and the signal also 
+                needs to be brought up 2.5V (VCOM) for the PCM. The LT1057 is set up as an 
+                inverting amplifier for this stage with a feedback resister of 10kohms. 
+                Something I <a href='https://www.electronics-tutorials.ws/opamp/opamp_2.html' style="text-decoration: underline">learned</a> about 
+                these inverting (negative terminal connected to ground and output) op amp stages is 
+                that our gain is calculated as the negative ratio between the feedback and input resistors. 
+                I've been stuck on the input/output stages for the past few days because I couldn't find the 
+                power pins and assumed that the two separate parts of the dual op amp were represented by a 
+                single schematic symbol. Turns out I just had to click three times for the second half and 
+                power pins to show up. 
+                </p>
+            <p class="ml-[20%] mr-[20%] mt-8 text-left text-xl"></p>
+            <p class="ml-[20%] mr-[20%] font-bold text-left text-xl mt-4 mb-4">Day 11</p>
+            <p class="ml-[20%] mr-[20%] mt-2 text-left">I needed a negative rail 
+                that could swing to both +5V and -5V (roughly). There's very little 
+                resources online which had recommendations for a negative voltage inverter. 
+                I did find a forum from four years ago which talked about the LT1054, but it's 
+                operating range was much higher than I needed. Texas Instruments does have the 
+                LM27761 which I think I will use. And now! Because I've switched to a negative 
+                rail with a voltage difference of 9.5V I no longer need an external 9V source!! 
+                The op amps were the only components that needed upwards of 9V to run, but no longer! 
+                Also finished wiring the op-amps (unity buffer, gain and differential to single ended 
+                output). HUGE thanks to the PCM3060EVM User Guide which had pretty much all the values 
+                for my caps and feedback/input resistors. The waveforms that I generated used a drop in 
+                replacement for the op amps in my design. For future testing I might switch them out with 
+                the actual models for the TL072 and RC4580. So last time I was just looking at how the 
+                current was changing over time (in the LTspice simulation).
+            </p>
+                <div class="flex justify-center">
+                    <Image src={ pedal3 } alt="ac sim" class="rounded-lg w-[60%]"/>
+                </div>
+                <p class="ml-[20%] mr-[20%] mt-2 text-left">
+                I ran ac analysis, 
+                but there is a huge dip in the waveforms and much more than expected. I believe 
+                that my resistor values might be a little off. In other news I have no ERC errors! 
+                I finished assigning all the footprints and got started on arranging the components 
+                for my pcb.
+                </p>
         <div class="p-8"/>
     </body>
 </html>

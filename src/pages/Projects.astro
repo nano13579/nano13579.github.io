@@ -2,11 +2,15 @@
 import Layout from "@/layouts/Layout.astro"
 import { Image } from "astro:assets"
 import crater0 from "../assets/crater0.png"
-import keeb0 from "../assets/keyboard.png"
+import crater1 from "../assets/crater1.png"
+import keeb0 from "../assets/split_keyboard.jpeg"
 import devboard0 from "../assets/3d-render.png"
 import car0 from "../assets/car.png"
-import macropad0 from "../assets/narwhal0.png"
+import macropad0 from "../assets/macropad.jpeg"
 import robotarm0 from "../assets/robotarm.jpg"
+import emfi from "../assets/emfi.png"
+import quadcopter from "../assets/quadcopter.png"
+import bootloader from "../assets/bootloader.png"
 import {
   Card,
   CardContent,
@@ -31,11 +35,11 @@ import {
                             <CardDescription>In Progress</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <Image src={ crater0 } alt="schematic crater" class="rounded-lg"/>
+                            <Image src={ crater1 } alt="schematic crater" class="rounded-lg"/>
                         </CardContent>
                         <CardFooter>
-                            <p>Employs the STM32H743, other peripherals 
-                            (i.e. Codec, LDO, Micro SD Reader), and passive components for effects</p>
+                            <p>Employs the STM32H743 as its DSP. Uses the PCM3060 codec, 8 MB of SDRAM, 32 MB of QSPI flash
+                                and dual op amps for pre & post processing</p>
                         </CardFooter>
                     </Card>
                 </a>
@@ -65,13 +69,15 @@ import {
                             <Image src={ keeb0 } alt="split keeb" class="rounded-lg"/>
                         </CardContent>
                         <CardFooter>
-                            <p>Hot swappable split keyboard from scratch with wireless communication and ZMK firmware</p>
+                            <p>Hot swappable split keyboard made entirely from scratch. Includes nice!nano MCUs, wireless communication, and ZMK firmware. My 
+                                completely open-source take on the UM-70.</p>
                         </CardFooter>
                     </Card>
                 </a>
             </div>
             <div class="break-inside-avoid mb-6">
-            <Card className="bg-darkblue w-auto">
+                <a href = https://github.com/shreya-0718/dragon>
+            <Card className="bg-darkblue w-auto hover:bg-middlestblue">
                 <CardHeader>
                     <CardTitle>A Drawing Robot</CardTitle>
                     <CardDescription>Completed - December 2025</CardDescription>
@@ -85,21 +91,7 @@ import {
                         that mimics human drawings</p>
                 </CardFooter>
             </Card>
-            </div>
-            <div class="break-inside-avoid mb-6">
-                <a href=https://github.com/nano13579/radii-script>
-                    <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
-                        <CardHeader>
-                            <CardTitle>Radii Script</CardTitle>
-                            <CardDescription>In Progress</CardDescription>
-                        </CardHeader>
-                        <CardFooter>
-                            <p>Using Robert Nydstrom's, "Crafting Interpreters"
-                        as a guideline to implement a fully functional scripting language. Trying to make 
-                    this entirely in Neovim!</p>
-                        </CardFooter>
-                    </Card>
-                </a>
+        </a>
             </div>
             <div class="break-inside-avoid mb-6">
                 <a href=https://github.com/nano13579/rp2040-devboard>
@@ -112,7 +104,7 @@ import {
                             <Image src={ devboard0 } alt="dev board" class="rounded-lg"/>
                         </CardContent>
                         <CardFooter>
-                            <p>An RP2040 devboard from scratch w/ an Infineon CYW43xxx chip for wireless (WIP) communication</p>
+                            <p>An RP2040 devboard with a small TSL2591 light sensor!</p>
                         </CardFooter>
                     </Card>
                 </a>
@@ -153,6 +145,71 @@ import {
                     </Card>
                 </a>
             </div>
+            <div class="break-inside-avoid mb-6">
+                <a href=https://github.com/nano13579/emfi-board>
+                    <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
+                        <CardHeader>
+                            <CardTitle>Custom EMFI Tool</CardTitle>
+                            <CardDescription>In Progress</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Image src={ emfi } alt="emfi image" class="rounded-lg"/>
+                        </CardContent>
+                        <CardFooter>
+                            <p>A custom RP2040 based electromagentic fault injection tool. 
+                                Equips the LT3751 high voltage controller and (perhaps) an inbuilt
+                            multi layer PCB coil.</p>
+                        </CardFooter>
+                    </Card>
+                </a>
+            </div>
+            <div class="break-inside-avoid mb-6">
+                <a href=https://github.com/nano13579/quadcopter/tree/main>
+                    <Card className="bg-darkblue w-auto border border-4 hover:bg-middlestblue">
+                        <CardHeader>
+                            <CardTitle>Quadcopter</CardTitle>
+                            <CardDescription>In Progress</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Image src={ quadcopter } alt="quadcopter image" class="rounded-lg"/>
+                        </CardContent>
+                        <CardFooter>
+                            <p>Drone FC using the STM32H7 and Ardupilot!</p>
+                        </CardFooter>
+                    </Card>
+                </a>
+            </div>
+            <div class="break-inside-avoid mb-6">
+                <a href = https://github.com/nano13579/design-challenge>
+                    <Card className="bg-darkblue w-auto hover:bg-middlestblue">
+                        <CardHeader>
+                            <CardTitle>Secure Bootloader System</CardTitle>
+                            <CardDescription>Completed - June 2026</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <Image src={ bootloader } alt="bootloader image" class="rounded-lg"/>
+                        </CardContent>
+                        <CardFooter>
+                            <p> Designed w/ my team @ BWSI for the TM4C123GXL MCU. Secured using the ChaCha20-Poly1305 symmetric stream cipher
+                                and the Ed25519 signing algorithm. Attempted attacks against other teams using EMFI, DPA, Bus Pirate.
+                            </p>
+                        </CardFooter>
+                    </Card>
+                </a>
+            </div>
+            <!-- <div class="break-inside-avoid mb-6">
+                    <Card className="bg-darkblue w-auto border border-4">
+                        <CardHeader>
+                            <CardTitle>Radii Script</CardTitle>
+                            <CardDescription>In Progress</CardDescription>
+                        </CardHeader>
+                        <CardFooter>
+                            <p>Using Robert Nydstrom's, "Crafting Interpreters"
+                        as a guideline to implement a fully functional scripting language. Trying to make 
+                    this entirely in Neovim!</p>
+                        </CardFooter>
+                    </Card>
+            </div> -->
         </div>
     </body>
 </html>
